@@ -5,7 +5,6 @@ import { suiClient } from "@/lib/sui";
 import Link from "next/link";
 import { formatDistanceToNow } from "date-fns";
 import {
-  Shield,
   Clock,
   AlertTriangle,
   FileText,
@@ -13,8 +12,10 @@ import {
   CheckCircle,
   Zap,
   ChevronRight,
+  Plus,
 } from "lucide-react";
 import { useUserStore } from "@/stores/use-user";
+import { Button } from "@/components/ui/button";
 
 type LogEvent = {
   logId: string;
@@ -55,7 +56,7 @@ export default function LogsListPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [filterSeverity, setFilterSeverity] = useState<number | null>(null);
-  const { role } = useUserStore();
+  const { role, address } = useUserStore();
 
   useEffect(() => {
     fetchLogs();
@@ -159,31 +160,6 @@ export default function LogsListPage() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      {/* Header with branding */}
-      <header className="border-b border-border/50 bg-card/50 backdrop-blur-sm sticky top-0 z-10">
-        <div className="mx-auto max-w-7xl px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="p-2 rounded-lg bg-primary/10 border border-primary/30">
-              <Shield className="h-6 w-6 text-primary" />
-            </div>
-            <div>
-              <h1 className="text-lg font-bold text-foreground">
-                Compliance Log
-              </h1>
-              <p className="text-xs text-muted-foreground">
-                Selective Disclosure
-              </p>
-            </div>
-          </div>
-          <div className="text-right">
-            <p className="text-xs text-muted-foreground">Role</p>
-            <p className="text-sm font-semibold text-primary">
-              {role?.replace("_", " ") || "Auditor"}
-            </p>
-          </div>
-        </div>
-      </header>
-
       <main className="mx-auto max-w-7xl px-6 py-12">
         {/* Hero Section */}
         <section className="mb-12">
@@ -281,11 +257,7 @@ export default function LogsListPage() {
               </span>
               <ChevronRight className="h-4 w-4 text-muted-foreground" />
               <span className="px-3 py-1 rounded-full bg-muted text-muted-foreground border border-border">
-                5. Index in Nautilus
-              </span>
-              <ChevronRight className="h-4 w-4 text-muted-foreground" />
-              <span className="px-3 py-1 rounded-full bg-muted text-muted-foreground border border-border">
-                6. Verify via Seal
+                5. Verify via Seal
               </span>
             </div>
           </div>
@@ -385,9 +357,17 @@ export default function LogsListPage() {
 
         {/* Logs List */}
         <section>
-          <h3 className="font-semibold text-sm mb-4 text-muted-foreground uppercase tracking-wide">
-            Audit Log Registry ({filteredLogs.length})
-          </h3>
+          <div className="flex flex-wrap justify-between items-center mb-4">
+            <h3 className="font-semibold text-sm mb-4 text-muted-foreground uppercase tracking-wide">
+              Audit Log Registry ({filteredLogs.length})
+            </h3>
+            <Button asChild disabled={role === "AUDITOR" || !address}>
+              <Link href="/logs/register">
+                <Plus className="h-4 w-4" />
+                Register New Log
+              </Link>
+            </Button>
+          </div>
 
           {filteredLogs.length === 0 ? (
             <div className="rounded-lg border border-border/50 bg-card/50 backdrop-blur-sm p-12 text-center">
