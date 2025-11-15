@@ -480,9 +480,13 @@ export default function LogDetailPage() {
             )}...\nGot: ${calculatedHex.slice(0, 16)}...`,
       });
 
-      toast.success(isMatch ? "File matches" : "File doesn't match", {
-        id: "verify-upload",
-      });
+      if (isMatch) {
+        toast.success("File matches the original log", { id: "verify-upload" });
+      } else {
+        toast.error("File does not match the original log", {
+          id: "verify-upload",
+        });
+      }
     } catch (err) {
       console.error("Upload verification failed:", err);
       toast.error(err instanceof Error ? err.message : "Verification failed", {
