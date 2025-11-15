@@ -24,11 +24,11 @@ import {
   Unlock,
   Database,
   Zap,
-  Search,
   CheckCheck,
   Copy,
 } from "lucide-react";
 import { toast } from "sonner";
+import ModalRequestAccess from "@/components/menus/logs/access-request/modal-request-access";
 
 type LogDetail = {
   logId: string;
@@ -683,9 +683,7 @@ export default function LogDetailPage() {
                       <p className="text-destructive/70 text-xs mt-1">
                         Request access to view decrypted content
                       </p>
-                      <button className="mt-3 w-full px-3 py-2 bg-destructive/20 hover:bg-destructive/30 text-destructive rounded text-sm font-medium transition-colors">
-                        Request Access
-                      </button>
+                      <ModalRequestAccess logId={log.logId} />
                     </div>
                   )}
 
