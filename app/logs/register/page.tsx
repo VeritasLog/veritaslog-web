@@ -1,14 +1,24 @@
 "use client";
-import { AlertCircle, ArrowRight } from "lucide-react";
+import { AlertCircle, ArrowLeft, ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 import UploadLogForm from "@/components/forms/upload-log-form";
+import { Button } from "@/components/ui/button";
+
 import { useUserStore } from "@/stores/use-user";
 
 export default function UploadPage() {
   const { role } = useUserStore();
 
   return (
-    <main className="h-full bg-background max-w-6xl mx-auto px-6 py-2 space-y-4">
+    <main className="h-full bg-background max-w-7xl mx-auto px-6 py-2 space-y-4">
+      <Button asChild className="transition-colors" variant={"ghost"}>
+        <Link href="/logs">
+          <ArrowLeft className="w-4 h-4" />
+          Back to Logs
+        </Link>
+      </Button>
+
       <div className="grid grid-cols-1 md:grid-cols-5 gap-3">
         {[
           { label: "Describe", icon: "📋" },
