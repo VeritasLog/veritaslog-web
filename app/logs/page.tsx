@@ -159,11 +159,11 @@ export default function LogsListPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <main className="mx-auto max-w-7xl px-6 py-12">
+    <div className="min-h-full bg-background text-foreground">
+      <main className="mx-auto max-w-7xl px-6 py-2">
         {/* Hero Section */}
-        <section className="mb-12">
-          <div className="rounded-lg border border-border/50 bg-gradient-to-br from-card/50 to-card/30 backdrop-blur-sm p-8 mb-8">
+        {/* <section className="mb-12"> */}
+        {/* <div className="rounded-lg border border-border/50 bg-gradient-to-br from-card/50 to-card/30 backdrop-blur-sm p-8 mb-8">
             <div className="max-w-3xl">
               <h2 className="text-3xl font-bold mb-3 text-balance">
                 Compliance Log with Selective Disclosure
@@ -185,10 +185,10 @@ export default function LogsListPage() {
                 </span>
               </div>
             </div>
-          </div>
+          </div> */}
 
-          {/* Three Pillars */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {/* Three Pillars */}
+        {/* <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="pillar-card">
               <div className="pillar-icon">🔒</div>
               <h3 className="font-semibold text-base mb-2 text-blue-300">
@@ -230,11 +230,11 @@ export default function LogsListPage() {
                 Powered by Nautilus
               </div>
             </div>
-          </div>
-        </section>
+          </div> */}
+        {/* </section> */}
 
         {/* Lifecycle Pipeline */}
-        <section className="mb-8">
+        {/* <section className="mb-8">
           <div className="rounded-lg border border-border/50 bg-card/50 backdrop-blur-sm p-6">
             <h3 className="font-semibold text-sm mb-4 text-muted-foreground uppercase tracking-wide">
               Log Lifecycle
@@ -261,7 +261,7 @@ export default function LogsListPage() {
               </span>
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* Filters Section */}
         <section className="mb-8">
@@ -272,7 +272,7 @@ export default function LogsListPage() {
             <div className="flex flex-wrap gap-3">
               <button
                 onClick={() => setFilterSeverity(null)}
-                className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all cursor-pointer ${
                   filterSeverity === null
                     ? "bg-primary text-primary-foreground border border-primary shadow-lg shadow-primary/20"
                     : "bg-muted text-muted-foreground border border-border hover:border-primary/50 hover:text-foreground"
@@ -290,7 +290,7 @@ export default function LogsListPage() {
                   <button
                     key={sev}
                     onClick={() => setFilterSeverity(sev)}
-                    className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all badge-protocol ${
+                    className={`inline-flex items-center gap-2 px-4 py-2 text-sm font-medium transition-all badge-protocol cursor-pointer ${
                       filterSeverity === sev
                         ? `${severity.badgeClass} shadow-lg`
                         : `${severity.badgeClass} opacity-60 hover:opacity-100`
