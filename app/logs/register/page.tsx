@@ -2,7 +2,7 @@
 import { AlertCircle, ArrowLeft, ArrowRight } from "lucide-react";
 import Link from "next/link";
 
-import UploadLogForm from "@/components/forms/upload-log-form";
+import UploadLogForm from "@/components/menus/logs/register/form";
 import { Button } from "@/components/ui/button";
 
 import { useUserStore } from "@/stores/use-user";

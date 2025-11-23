@@ -28,7 +28,7 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "../ui/card";
+} from "@/components/ui/card";
 import { CustomField } from "@/components/ui/form-field";
 
 import { PACKAGE_ID, REGISTRY_ID } from "@/lib/sui";
