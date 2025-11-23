@@ -31,6 +31,7 @@ import {
   approveAccess,
   rejectAccess,
 } from "@/lib/contracts";
+import { useUserStore } from "@/stores/use-user";
 
 interface AccessRequest {
   logId: number;
@@ -44,6 +45,7 @@ interface AccessRequest {
 export default function AccessRequestsPage() {
   const account = useCurrentAccount();
   const client = useSuiClient();
+  const { role } = useUserStore();
   const { mutateAsync: signAndExecute } = useSignAndExecuteTransaction();
   const [requests, setRequests] = useState<AccessRequest[]>([]);
   const [loading, setLoading] = useState(true);
@@ -166,6 +168,21 @@ export default function AccessRequestsPage() {
             <h3 className="text-lg font-semibold mb-2">Connect Wallet</h3>
             <p className="text-muted-foreground">
               Please connect your wallet to view access requests
+            </p>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+
+  if (role !== "ADMIN" && role !== "SUPER_ADMIN") {
+    return (
+      <div className="container mx-auto p-6 max-w-6xl">
+        <Card>
+          <CardContent className="p-12 text-center">
+            <h3 className="text-lg font-semibold mb-2">Access Denied</h3>
+            <p className="text-muted-foreground">
+              You do not have permission to view access requests
             </p>
           </CardContent>
         </Card>

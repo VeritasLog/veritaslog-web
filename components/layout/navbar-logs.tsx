@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { Shield, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 import ConnectWalletButton from "./connect-wallet";
 import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";
@@ -43,17 +44,30 @@ function Navbar() {
 
         {/* Right: Role + Actions */}
         <div className="flex items-center justify-between gap-3 sm:gap-4 md:gap-6">
+          {/* Desktop / Tablet actions */}
+          <div className="hidden items-center gap-3 sm:flex sm:gap-4 md:gap-6">
+            <Link
+              href="/logs"
+              className="text-sm font-medium text-foreground hover:text-primary transition-colors"
+            >
+              Logs
+            </Link>
+            {(role === "SUPER_ADMIN" || role === "ADMIN") && (
+              <Link
+                href="/logs/access-request"
+                className="text-sm font-medium text-foreground hover:text-primary transition-colors"
+              >
+                Access Requests
+              </Link>
+            )}
+            <AnimatedThemeToggler />
+            <ConnectWalletButton />
+          </div>
           <div className="text-right">
             <p className="text-[11px] text-muted-foreground sm:text-xs">Role</p>
             <p className="text-sm font-semibold text-primary">
               {role?.replace("_", " ") || "AUDITOR"}
             </p>
-          </div>
-
-          {/* Desktop / Tablet actions */}
-          <div className="hidden items-center gap-3 sm:flex sm:gap-4 md:gap-6">
-            <AnimatedThemeToggler />
-            <ConnectWalletButton />
           </div>
 
           {/* Mobile hamburger */}
@@ -81,6 +95,27 @@ function Navbar() {
       {isMobileMenuOpen && (
         <div className="border-t border-border/50 bg-card/95 backdrop-blur-sm sm:hidden">
           <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-3">
+            <div>
+              <p className="text-[11px] text-muted-foreground">Navigation</p>
+              <Link
+                href="/logs"
+                className="mt-1 block text-sm font-medium text-foreground hover:text-primary transition-colors"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {" "}
+                Logs
+              </Link>
+              {(role === "SUPER_ADMIN" || role === "ADMIN") && (
+                <Link
+                  href="/logs/access-request"
+                  className="mt-1 block text-sm font-medium text-foreground hover:text-primary transition-colors"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Access Requests
+                </Link>
+              )}
+            </div>
+
             <div>
               <p className="text-[11px] text-muted-foreground">Theme</p>
               <div className="mt-1">
